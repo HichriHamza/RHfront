@@ -6,6 +6,7 @@ import SignUpPage from "./components/SignUpPage";
 import "./App.css";
 import Dashboard from "./components/dashboard/dashboard";
 import Sidebar from "./components/SideBar";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
@@ -17,8 +18,17 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/sidebar" element={<Sidebar />} />
+        <Route
+          path="/dashboard"
+          element={
+            
+            <div className="dashboard-container">
+            <ProtectedRoute/>
+              <Sidebar />
+              <Dashboard />
+            </div>
+          }
+        />
         
       </Routes>
     </Router>

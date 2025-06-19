@@ -4,3 +4,6 @@ body {
   background-color: #f9fafb;
   color: #111827;
 }
+.dashboard-container {
+  min-height: 100vh;
+}

@@ -3,19 +3,19 @@ import {
   Heart, 
   Users, 
   BarChart3, 
-  Shield, 
-  Settings,
   LogOut,
   User,
   Home,
   TrendingUp,
-  MessageSquare,
   Calendar,
   FileText
 } from 'lucide-react';
 import './Sidebar.css';
+import { useNavigate } from 'react-router-dom'; // Required to navigate
 
-const Sidebar = ({ activeTab, setActiveTab, onProfileClick, onLogout, userName = "MizouH" }) => {
+const Sidebar = ({ activeTab, setActiveTab, userName = "MizouH" }) => {
+  const navigate = useNavigate(); // Hook to navigate programmatically
+
   const menuItems = [
     { id: 'dashboard', label: 'Dashboard', icon: Home },
     { id: 'employees', label: 'Employee Management', icon: Users },
@@ -24,11 +24,16 @@ const Sidebar = ({ activeTab, setActiveTab, onProfileClick, onLogout, userName =
     { id: 'interventions', label: 'Early Interventions', icon: Heart },
     { id: 'scheduling', label: 'Scheduling', icon: Calendar },
     { id: 'reports', label: 'Reports & Insights', icon: TrendingUp },
-
   ];
-   const handleLogout = () => {
-    localStorage.removeItem('authenticated'); // Remove the auth flag
-    navigate('/login'); // Redirect to login page
+
+  const handleLogout = () => {
+    localStorage.removeItem('authenticated'); // Remove auth flag
+    navigate('/'); // Redirect to Landing Page ("/")
+    window.location.reload(); // Force full reload to reset app state
+  };
+
+  const handleProfileClick = () => {
+    navigate('/profile'); // Redirect to Profile page
   };
 
   return (
@@ -64,22 +69,21 @@ const Sidebar = ({ activeTab, setActiveTab, onProfileClick, onLogout, userName =
 
       {/* User Profile Section */}
       <div className="sidebar-profile">
-        <div className="profile-container">
+        <div className="profileName-container">
           <div className="profile-avatar">
             <User className="avatar-icon" />
           </div>
           <div className="profile-info">
             <button 
-              onClick={onProfileClick}
-              className="profile-name"
+              onClick={handleProfileClick} // Go to Profile
+              className="sideprofile-name"
             >
               {userName}
             </button>
             <p className="profile-role">Administrator</p>
           </div>
           <button
-          onClick={handleLogout}
-            // onClick={onLogout}
+            onClick={handleLogout} // Correct Logout Logic
             className="logout-btn"
             title="Logout"
           >

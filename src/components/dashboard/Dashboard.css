@@ -4,7 +4,7 @@
   padding-top: 1.5rem;
 
 
-  background-color: #f9fafb;
+  background:linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 50%, #f0fdfa 100%);
   min-height: 90vh;
   margin-left: 0rem;
 }

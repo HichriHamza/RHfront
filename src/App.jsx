@@ -8,33 +8,39 @@ import Dashboard from "./components/dashboard/dashboard";
 import Sidebar from "./components/SideBar";
 import ProtectedRoute from "./components/ProtectedRoute";
 import LayoutComponent from "./components/LayoutModel/LayoutComponent";
+import Profile from "./components/Profile/Profile";
 
 function App() {
   return (
-    <>
-
-    
     <Router>
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
+        
         <Route
           path="/dashboard"
           element={
-            
-            <div>
-            <ProtectedRoute/>
+            <ProtectedRoute>
               <LayoutComponent>
                 <Dashboard />
               </LayoutComponent>
-            </div>
+            </ProtectedRoute>
           }
         />
-        
+
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <LayoutComponent>
+                <Profile />
+              </LayoutComponent>
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </Router>
-    </>
   );
 }
 

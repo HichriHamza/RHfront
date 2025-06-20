@@ -15,19 +15,21 @@ import {
 } from 'lucide-react';
 import './Sidebar.css';
 
-const Sidebar = ({ activeTab, setActiveTab, onProfileClick, onLogout, userName = "Dr. Sarah Johnson" }) => {
+const Sidebar = ({ activeTab, setActiveTab, onProfileClick, onLogout, userName = "MizouH" }) => {
   const menuItems = [
     { id: 'dashboard', label: 'Dashboard', icon: Home },
     { id: 'employees', label: 'Employee Management', icon: Users },
     { id: 'analytics', label: 'Mental Health Analytics', icon: BarChart3 },
-    { id: 'peer-support', label: 'Peer Support Network', icon: MessageSquare },
     { id: 'assessments', label: 'Health Assessments', icon: FileText },
     { id: 'interventions', label: 'Early Interventions', icon: Heart },
     { id: 'scheduling', label: 'Scheduling', icon: Calendar },
     { id: 'reports', label: 'Reports & Insights', icon: TrendingUp },
-    { id: 'security', label: 'Security & Privacy', icon: Shield },
-    { id: 'settings', label: 'System Settings', icon: Settings },
+
   ];
+   const handleLogout = () => {
+    localStorage.removeItem('authenticated'); // Remove the auth flag
+    navigate('/login'); // Redirect to login page
+  };
 
   return (
     <div className="sidebar">
@@ -76,7 +78,8 @@ const Sidebar = ({ activeTab, setActiveTab, onProfileClick, onLogout, userName =
             <p className="profile-role">Administrator</p>
           </div>
           <button
-            onClick={onLogout}
+          onClick={handleLogout}
+            // onClick={onLogout}
             className="logout-btn"
             title="Logout"
           >

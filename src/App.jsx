@@ -7,6 +7,7 @@ import "./App.css";
 import Dashboard from "./components/dashboard/dashboard";
 import Sidebar from "./components/SideBar";
 import ProtectedRoute from "./components/ProtectedRoute";
+import LayoutComponent from "./components/LayoutModel/LayoutComponent";
 
 function App() {
   return (
@@ -22,10 +23,11 @@ function App() {
           path="/dashboard"
           element={
             
-            <div className="dashboard-container">
+            <div>
             <ProtectedRoute/>
-              <Sidebar />
-              <Dashboard />
+              <LayoutComponent>
+                <Dashboard />
+              </LayoutComponent>
             </div>
           }
         />

@@ -1,7 +1,12 @@
 .dashboard-container {
-  padding: 2rem;
+  padding-left: 1.5rem;
+  padding-right: 1rem;
+  padding-top: 1.5rem;
+
+
   background-color: #f9fafb;
-  min-height: 100vh;
+  min-height: 90vh;
+  margin-left: 0rem;
 }
 
 .dashboard-header {

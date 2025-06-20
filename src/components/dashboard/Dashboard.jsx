@@ -37,10 +37,10 @@ const Dashboard = () => {
           <button className="notification-btn">
             <Bell className="notification-icon" />
           </button>
-          {/* Logout button added here */}
-          <button onClick={handleLogout} className="logout-btn">
+
+          {/* <button onClick={handleLogout} className="logout-btn">
             Logout
-          </button>
+          </button> */}
         </div>
       </div>
 

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { User, Mail, Phone, MapPin, Calendar, Edit3, Save, X, Camera } from 'lucide-react';
 import './Profile.css';
 
-const Profile = ({ userName = "Dr. Sarah Johnson" }) => {
+const Profile = ({ userName = "MizouH" }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [profileData, setProfileData] = useState({
     name: userName,

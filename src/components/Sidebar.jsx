@@ -10,26 +10,31 @@ import {
   Calendar,
   FileText
 } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import './Sidebar.css';
-import { useNavigate } from 'react-router-dom'; // Required to navigate
 
-const Sidebar = ({ activeTab, setActiveTab, userName = "MizouH" }) => {
-  const navigate = useNavigate(); // Hook to navigate programmatically
+const Sidebar = ({ userName = "MizouH" }) => {
+  const navigate = useNavigate();
+  
 
   const menuItems = [
-    { id: 'dashboard', label: 'Dashboard', icon: Home },
-    { id: 'employees', label: 'Employee Management', icon: Users },
-    { id: 'analytics', label: 'Mental Health Analytics', icon: BarChart3 },
-    { id: 'assessments', label: 'Health Assessments', icon: FileText },
-    { id: 'interventions', label: 'Early Interventions', icon: Heart },
-    { id: 'scheduling', label: 'Scheduling', icon: Calendar },
-    { id: 'reports', label: 'Reports & Insights', icon: TrendingUp },
+    { path: '/dashboard', label: 'Dashboard', icon: Home },
+    { path: '/employees', label: 'Employee Management', icon: Users },
+    { path: '/analytics', label: 'Mental Health Analytics', icon: BarChart3 },
+    { path: '/assessments', label: 'Health Assessments', icon: FileText },
+    { path: '/interventions', label: 'Early Interventions', icon: Heart },
+    { path: '/scheduling', label: 'Scheduling', icon: Calendar },
+    { path: '/reports', label: 'Reports & Insights', icon: TrendingUp },
   ];
 
+  const handleNavigation = (path) => {
+    navigate(path);
+  };
+
   const handleLogout = () => {
-    localStorage.removeItem('authenticated'); // Remove auth flag
-    navigate('/'); // Redirect to Landing Page ("/")
-    window.location.reload(); // Force full reload to reset app state
+    localStorage.removeItem('authenticated');
+    navigate('/'); // Redirect to Landing Page
+    window.location.reload(); // (optional) to clear app state
   };
 
   const handleProfileClick = () => {
@@ -55,9 +60,9 @@ const Sidebar = ({ activeTab, setActiveTab, userName = "MizouH" }) => {
             const Icon = item.icon;
             return (
               <button
-                key={item.id}
-                onClick={() => setActiveTab(item.id)}
-                className={`nav-item ${activeTab === item.id ? 'active' : ''}`}
+                key={item.label}
+                onClick={() => handleNavigation(item.path)}
+                className="nav-item"
               >
                 <Icon className="nav-icon" />
                 <span className="nav-label">{item.label}</span>
@@ -67,6 +72,7 @@ const Sidebar = ({ activeTab, setActiveTab, userName = "MizouH" }) => {
         </nav>
       </div>
 
+      
       {/* User Profile Section */}
       <div className="sidebar-profile">
         <div className="profileName-container">
@@ -75,7 +81,7 @@ const Sidebar = ({ activeTab, setActiveTab, userName = "MizouH" }) => {
           </div>
           <div className="profile-info">
             <button 
-              onClick={handleProfileClick} // Go to Profile
+              onClick={handleProfileClick}
               className="sideprofile-name"
             >
               {userName}
@@ -83,7 +89,7 @@ const Sidebar = ({ activeTab, setActiveTab, userName = "MizouH" }) => {
             <p className="profile-role">Administrator</p>
           </div>
           <button
-            onClick={handleLogout} // Correct Logout Logic
+            onClick={handleLogout}
             className="logout-btn"
             title="Logout"
           >

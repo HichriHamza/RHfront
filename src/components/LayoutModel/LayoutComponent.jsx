@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Sidebar from '../SideBar';
+
 const LayoutComponent = ({ children }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -7,10 +8,10 @@ const LayoutComponent = ({ children }) => {
 
   return (
     <div className="dashboard-layout" style={{ display: 'flex' }}>
-      {/* Toggle button only on mobile */}
+      {/* Toggle button (visible only on small screens via CSS) */}
       <button 
         onClick={toggleSidebar} 
-        className="sidebar-toggle" 
+        className="sidebar-toggle"
         style={{
           position: 'fixed',
           top: '1rem',
@@ -19,17 +20,20 @@ const LayoutComponent = ({ children }) => {
           background: '#22c55e',
           color: 'white',
           border: 'none',
-          padding: '0.5rem',
+          padding: '0.5rem 1rem',
           borderRadius: '0.5rem',
-          display: 'none'
+          cursor: 'pointer',
+          display: 'none' // hidden by default (will show via media query)
         }}
       >
         ☰
       </button>
 
-      <Sidebar className={isSidebarOpen ? 'sidebar mobile-visible' : 'sidebar mobile-hidden'} />
+      {/* Sidebar with dynamic class based on toggle */}
+      <Sidebar isOpen={isSidebarOpen} />
 
-      <div style={{ flex: 1, paddingLeft: '0', marginLeft: '0' }}>
+      {/* Main content — margin for desktop, no margin for mobile */}
+      <div className="main-content" style={{ flex: 1, padding: '1rem' }}>
         {children}
       </div>
     </div>

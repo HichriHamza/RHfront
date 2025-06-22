@@ -16,7 +16,8 @@ function LoginPage() {
   // Static account credentials for demo login
   const staticAccount = {
     email: 'user@example.com',
-    password: 'password123'
+    password: 'password123',
+    userName:"Mizouh",
   };
 
   const handleInputChange = (e) => {
@@ -34,6 +35,7 @@ function LoginPage() {
     if (formData.email === staticAccount.email && formData.password === staticAccount.password) {
       console.log('Login successful, redirecting to Dashboard...');
       localStorage.setItem('authenticated', 'true'); // ✅ set flag in localStorage
+      localStorage.setItem('user', JSON.stringify({ userName: 'MizouH' }));
       navigate('/dashboard'); // ✅ redirect to dashboard
     } else {
       // Show error toaster notification

@@ -1,29 +1,55 @@
 .sidebar {
   width: 100%;
   max-width: 16rem;
-  background: white;
+  background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 50%, #f0fdfa 100%);
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
   border-right: 1px solid #e5e7eb;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   flex-shrink: 0;
-  transition: transform 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
-/* By default hidden on small screens */
+/* Collapsed Sidebar for small screen toggle */
+.sidebar.collapsed {
+  max-width: 4rem; /* Narrower width */
+}
+
+/* Hide nav labels when collapsed */
+.sidebar.collapsed .nav-label {
+  display: none;
+}
+
+/* Hide profile name and role when collapsed */
+.sidebar.collapsed .sideprofile-name,
+.sidebar.collapsed .profile-role {
+  display: none;
+}
+
+/* Center icons when collapsed */
+.sidebar.collapsed .nav-item {
+  justify-content: center;
+}
+
+/* Center profile icon when collapsed */
+.sidebar.collapsed .profileName-container {
+  justify-content: center;
+}
+
+/* Sidebar hidden on mobile (slide left) */
 .sidebar.mobile-hidden {
   transform: translateX(-100%);
 }
 
-/* When shown on small screens */
+/* Sidebar visible on mobile (slide in) */
 .sidebar.mobile-visible {
   transform: translateX(0);
 }
 
 @media (min-width: 768px) {
   .sidebar {
-    transform: translateX(0) !important; /* Always visible on desktop */
+    transform: translateX(0) !important;
   }
 }
 
@@ -73,11 +99,26 @@
   flex-direction: column;
   gap: 0.5rem;
 }
+.sidebar-toggle{
+          position: 'right';
+          top: '1rem';
+          left: '1rem';
+          z-Index: '200';
+          background: '#22c55e';
+          color: 'white';
+          border: 'none';
+          padding: '0.5rem 1rem';
+          border-radius: '0.5rem';
+          cursor: 'pointer';
+          display: 'none';
+}
+
 @media (max-width: 768px) {
   .sidebar-toggle {
     display: block !important;
   }
 }
+
 .nav-item {
   width: 100%;
   display: flex;
@@ -103,6 +144,7 @@
   color: #15803d;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
   border: 1px solid #bbf7d0;
+  border-radius: 8px;
 }
 
 .nav-icon {

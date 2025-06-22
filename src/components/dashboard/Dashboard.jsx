@@ -9,18 +9,11 @@ import {
   MessageSquare,
   TrendingUp
 } from 'lucide-react';
-import { useNavigate } from 'react-router-dom'; // Added for navigation
+import { useNavigate } from 'react-router-dom'; // Used for navigation
 import './Dashboard.css';
 
 const Dashboard = () => {
   const navigate = useNavigate();
-
-  // Logout handler: clears auth flag and redirects
-  const handleLogout = () => {
-    localStorage.removeItem('authenticated'); // Remove the auth flag
-    navigate('/login'); // Redirect to login page
-  };
-
   return (
     <div className="dashboard-container">
       <div className="dashboard-header">
@@ -32,19 +25,27 @@ const Dashboard = () => {
               type="text" 
               placeholder="Search..." 
               className="search-input"
+              aria-label="Search dashboard" 
+              // TODO: Add onChange handler when search functionality is ready
             />
           </div>
-          <button className="notification-btn">
+          <button 
+            className="notification-btn"
+            aria-label="Notifications"
+            // TODO: Add onClick handler for notifications panel
+          >
             <Bell className="notification-icon" />
           </button>
 
-          {/* <button onClick={handleLogout} className="logout-btn">
-            Logout
-          </button> */}
+         
         </div>
       </div>
 
       {/* Stats Cards */}
+      {/* 
+        NOTE: Data is hardcoded here for now.
+        Future improvement: load these stats dynamically from backend via props or API call.
+      */}
       <div className="stats-grid">
         <div className="stat-card">
           <div className="stat-content">

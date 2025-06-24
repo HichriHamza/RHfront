@@ -99,24 +99,31 @@
   flex-direction: column;
   gap: 0.5rem;
 }
-.sidebar-toggle{
-          position: 'right';
-          top: '1rem';
-          left: '1rem';
-          z-Index: '200';
-          background: '#22c55e';
-          color: 'white';
-          border: 'none';
-          padding: '0.5rem 1rem';
-          border-radius: '0.5rem';
-          cursor: 'pointer';
-          display: 'none';
+
+
+/* Burger Toggle Styling */
+.sidebar-toggle {
+  position: absolute;
+  top: 1rem;
+  z-index: 300;
+  background: #22c55e;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  display: none;
+  
 }
 
 @media (max-width: 768px) {
   .sidebar-toggle {
-    display: block !important;
+    display: block;
+    right: 0.3rem; /* top-right of expanded sidebar */
+    left: auto;
+    transform: none;
   }
+
 }
 
 .nav-item {

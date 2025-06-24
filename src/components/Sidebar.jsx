@@ -1,8 +1,8 @@
 import React from 'react';
-import { 
-  Heart, 
-  Users, 
-  BarChart3, 
+import {
+  Heart,
+  Users,
+  BarChart3,
   LogOut,
   User,
   Home,
@@ -13,7 +13,7 @@ import {
 import { useNavigate, useLocation } from 'react-router-dom';
 import './Sidebar.css';
 
-const Sidebar = ({ userName = "MizouH", isOpen }) => {
+const Sidebar = ({ userName = "MizouH", isOpen, toggleSidebar }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -28,24 +28,31 @@ const Sidebar = ({ userName = "MizouH", isOpen }) => {
   ];
 
   const handleNavigation = (path) => navigate(path);
-
   const handleLogout = () => {
     localStorage.removeItem('authenticated');
     localStorage.removeItem('user');
     navigate('/');
     window.location.reload();
   };
-
   const handleProfileClick = () => navigate('/profile');
 
   return (
-    <div className={`sidebar ${isOpen ? 'collapsed' : ''}`}>
+    <div className={`sidebar ${!isOpen ? 'collapsed' : ''}`}>
+
+      <button
+        className={`sidebar-toggle ${isOpen ? 'sidebar-open' : 'sidebar-collapsed'}`}
+        onClick={toggleSidebar}
+        title="Toggle Sidebar"
+      >
+        ☰
+      </button>
+
       <div className="sidebar-logo">
         <div className="logo-container">
           <div className="logo-icon">
             <Heart className="logo-heart" />
           </div>
-          {!isOpen && <span className="logo-text">WellCare</span>}
+          {isOpen && <span className="logo-text">WellCare</span>}
         </div>
       </div>
 
@@ -61,7 +68,7 @@ const Sidebar = ({ userName = "MizouH", isOpen }) => {
                 className={`nav-item ${isActive ? 'active' : ''}`}
               >
                 <Icon className="nav-icon" />
-                {!isOpen && <span className="nav-label">{item.label}</span>}
+                {isOpen && <span className="nav-label">{item.label}</span>}
               </button>
             );
           })}
@@ -73,7 +80,7 @@ const Sidebar = ({ userName = "MizouH", isOpen }) => {
           <div className="profile-avatar">
             <User className="avatar-icon" />
           </div>
-          {!isOpen && (
+          {isOpen && (
             <div className="profile-info">
               <button onClick={handleProfileClick} className="sideprofile-name">
                 {userName}

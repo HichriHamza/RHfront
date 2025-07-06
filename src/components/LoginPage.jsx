@@ -13,11 +13,11 @@ function LoginPage() {
     password: ''
   });
 
-  // Static account credentials for demo login
+  // Static user data for testing
   const staticAccount = {
     email: 'user@example.com',
     password: 'password123',
-    userName:"Mizouh",
+    userName: 'MizouH'
   };
 
   const handleInputChange = (e) => {
@@ -27,34 +27,51 @@ function LoginPage() {
     });
   };
 
+  // Advanced email format validation
+  const isValidEmail = (email) => {
+    const regex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/;
+    return regex.test(email);
+  };
+
   const handleLogin = (e) => {
     e.preventDefault();
-    console.log('Login attempt:', { email: formData.email, password: formData.password });
 
-    // Static authentication check
-    if (formData.email === staticAccount.email && formData.password === staticAccount.password) {
-      console.log('Login successful, redirecting to Dashboard...');
-      localStorage.setItem('authenticated', 'true'); // ✅ set flag in localStorage
-      localStorage.setItem('user', JSON.stringify({ userName: 'MizouH' }));
-      navigate('/dashboard'); // ✅ redirect to dashboard
+    const { email, password } = formData;
+
+    if (!email || !password) {
+      toast.error('Email and password are required.', {
+        position: 'top-right',
+        theme: 'colored',
+        style: { backgroundColor: '#fee2e2', color: '#991b1b' }
+      });
+      return;
+    }
+
+    if (!isValidEmail(email)) {
+      toast.error('Invalid email format.', {
+        position: 'top-right',
+        theme: 'colored',
+        style: { backgroundColor: '#ffedd5', color: '#c2410c' }
+      });
+      return;
+    }
+
+    if (email === staticAccount.email && password === staticAccount.password) {
+      localStorage.setItem('authenticated', 'true');
+      localStorage.setItem('user', JSON.stringify({ userName: staticAccount.userName }));
+      navigate('/dashboard');
     } else {
-      // Show error toaster notification
       toast.error('Invalid credentials. Please try again.', {
         position: 'top-right',
-        autoClose: 5000, // 5 seconds
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: 'colored'
+        theme: 'colored',
+        style: { backgroundColor: '#fef2f2', color: '#b91c1c' }
       });
     }
   };
 
   return (
     <div className="auth-container">
-      <ToastContainer /> {/* ✅ Toaster container */}
+      <ToastContainer />
       <div className="auth-card">
         <div className="auth-header">
           <div className="auth-logo">
@@ -64,7 +81,8 @@ function LoginPage() {
           <p className="auth-subtitle">Sign in to continue your wellness journey</p>
         </div>
 
-        <div className="auth-form">
+        {/* ✅ Form that submits on Enter key */}
+        <form className="auth-form" onSubmit={handleLogin}>
           <div className="form-group">
             <label className="form-label">Email Address</label>
             <div className="input-container">
@@ -79,7 +97,7 @@ function LoginPage() {
               />
               <label
                 className={`floating-label${formData.email ? ' filled' : ''}`}
-                htmlFor="Email"
+                htmlFor="email"
               >
                 Email Address
               </label>
@@ -91,7 +109,7 @@ function LoginPage() {
             <div className="input-container">
               <Lock className="input-icon" />
               <input
-                type={showPassword ? "text" : "password"}
+                type={showPassword ? 'text' : 'password'}
                 name="password"
                 value={formData.password}
                 onChange={handleInputChange}
@@ -100,7 +118,7 @@ function LoginPage() {
               />
               <label
                 className={`floating-label${formData.password ? ' filled' : ''}`}
-                htmlFor="Password"
+                htmlFor="password"
               >
                 Password
               </label>
@@ -114,14 +132,10 @@ function LoginPage() {
             </div>
           </div>
 
-          <button
-            type="button"
-            onClick={handleLogin}
-            className="auth-submit-btn"
-          >
+          <button type="submit" className="auth-submit-btn">
             Sign In
           </button>
-        </div>
+        </form>
 
         <div className="auth-footer">
           <p className="auth-switch-text">
@@ -135,10 +149,7 @@ function LoginPage() {
           </p>
         </div>
 
-        <button
-          onClick={() => navigate('/')}
-          className="back-home-btn"
-        >
+        <button onClick={() => navigate('/')} className="back-home-btn">
           ← Back to Home
         </button>
       </div>

@@ -1,0 +1,49 @@
+.assessment-choice {
+    text-align: center;
+    margin-top: 2rem;
+    padding: 1rem;
+  }
+  
+  .assessment-choice h2 {
+    font-size: 1.75rem;
+    color: #064e3b; /* emerald-900 */
+    margin-bottom: 1.5rem;
+  }
+  
+  .option-grid {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  
+  .option-card {
+    width: 280px;
+    padding: 1.5rem;
+    border: 1px solid #d1fae5; /* emerald-100 */
+    border-radius: 1rem;
+    background-color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    text-align: left;
+    cursor: pointer;
+  }
+  
+  .option-card h3 {
+    color: #047857; /* emerald-700 */
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+  }
+  
+  .option-card p {
+    color: #6b7280; /* gray-500 */
+    font-size: 0.95rem;
+  }
+  
+  .option-card:hover {
+    background-color: #ecfdf5; /* emerald-50 */
+    border-color: #10b981; /* emerald-500 */
+    transform: translateY(-3px);
+    box-shadow: 0 8px 16px rgba(16, 185, 129, 0.15);
+  }
+  

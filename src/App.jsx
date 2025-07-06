@@ -4,16 +4,16 @@ import LandingPage from "./components/LandingPage";
 import LoginPage from "./components/LoginPage";
 import SignUpPage from "./components/SignUpPage";
 import "./App.css";
-import Dashboard from "./components/dashboard/dashboard";
-import Sidebar from "./components/SideBar";
+import Dashboard from "./pages/dashboard/dashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
 import LayoutComponent from "./components/LayoutModel/LayoutComponent";
 import Profile from "./components/Profile/Profile";
+import SendAssessment from "./pages/Assessement/AssessementPage";
 
 // 🆕 Temporary dummy components (replace these with real ones later)
 const Employees = () => <h1>Employee Management Page</h1>;
 const Analytics = () => <h1>Mental Health Analytics Page</h1>;
-const Assessments = () => <h1>Health Assessments Page</h1>;
+
 const Interventions = () => <h1>Early Interventions Page</h1>;
 const Scheduling = () => <h1>Scheduling Page</h1>;
 const Reports = () => <h1>Reports & Insights Page</h1>;
@@ -78,7 +78,7 @@ function App() {
           element={
             <ProtectedRoute>
               <LayoutComponent>
-                <Assessments />
+                <SendAssessment />
               </LayoutComponent>
             </ProtectedRoute>
           }
